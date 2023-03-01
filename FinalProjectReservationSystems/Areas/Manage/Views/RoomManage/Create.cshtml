@@ -1,0 +1,82 @@
+﻿@using FinalProjectReservationSystems.Areas.ViewModel.Room;
+
+@model AddViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form method="post" enctype="multipart/form-data">
+
+    <div class="container-fluid">
+        <div class="row d-md-flex justify-content-md-center">
+            <div class="form-group col-5 mt-5">
+                <label asp-for="Name">Room Name<span class="text-danger">*</span></label>
+                <input asp-for="Name" class="form-control" placeholder="Enter Name Room">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div> @*Name*@
+            <div class="form-group col-5 mt-5">
+                <label asp-for="Description">Room Description<span class="text-danger">*</span></label>
+                <input asp-for="Description" class="form-control" placeholder="Enter Room Description">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div> @*Desc*@
+            <div class="form-group col-5 mt-5">
+                <label asp-for="Price">Room Price<span class="text-danger">*</span></label>
+                <input asp-for="Price" class="form-control" placeholder="Enter Room Price (per/night)">
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div> @*PRice*@
+            <div class="form-group col-5 mt-5">
+                <label asp-for="Size">Room Size (ft)<span class="text-danger">*</span></label>
+                <input asp-for="Size" class="form-control" placeholder="Enter Room Size">
+                <span asp-validation-for="Size" class="text-danger"></span>
+            </div> @*Size*@
+            <div class="form-group col-5 mt-5">
+                <label asp-for="Capacity">Room Capacity (person)<span class="text-danger">*</span></label>
+                <input asp-for="Capacity" class="form-control" placeholder="Enter Room Capacity">
+                <span asp-validation-for="Capacity" class="text-danger"></span>
+            </div> @*Capacity*@
+            <div class="form-group col-5 mt-5">
+                <label asp-for="BedType">Room BedType<span class="text-danger">*</span></label>
+                <input asp-for="BedType" class="form-control" placeholder="Enter Room BedType">
+                <span asp-validation-for="BedType" class="text-danger"></span>
+            </div> @*BedType*@
+
+
+            <div class="row d-md-flex justify-content-md-center">
+
+                <div class="form-group col-3 mx-5 mt-5">
+                    <label class="d-md-flex justify-content-md-center " asp-for="PosterFile">Poster Image<span class="text-danger">*</span></label>
+                    <div id="Posterdropzone">
+                        <input asp-for=PosterFile type="file" accept="image/png,image/jpeg, application/pdf" />
+                    </div>
+                    <span asp-validation-for="PosterFile" class="text-danger"></span>
+                </div> @*Poster*@
+
+                <div class="form-group col-3 mx-5 mt-5">
+                    <label class="d-md-flex justify-content-md-center " asp-for="DetailFile"> Detail Image<span class="text-danger">*</span></label>
+                    <div id="dropzone">
+                        <input asp-for=DetailFile multiple="multiple" type="file" accept="image/png,image/jpeg, application/pdf" />
+                    </div>
+                    <span asp-validation-for="DetailFile" class="text-danger"></span>
+                </div> @*Detail*@
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="container-fluid d-flex justify-content-center mt-5">
+
+        <div class="form-group">
+            <label>Services<span class="text-danger">*</span></label>
+            <select asp-for="ServiceIds" asp-items="@(new SelectList(ViewBag.RoomServices,"Id","Name"))" class="form-select get-subcategories"></select>
+            <span asp-validation-for="ServiceIds" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    @*asp-items="@(new SelectList(Model.Services , nameof(AddViewModel.Id), nameof(AddViewModel.Name)))*@
+    <div class="container-fluid d-flex justify-content-center mt-5">
+        <button type="submit" class="btn btn-success"><i class="fa-solid fa-plus"></i>Submit!</button>
+    </div>
+</form>
+

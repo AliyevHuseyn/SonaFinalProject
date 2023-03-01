@@ -1,0 +1,73 @@
+﻿@using FinalProjectReservationSystems.Areas.ViewModel.Setting;
+@model SettingViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form method="post" enctype="multipart/form-data">
+
+    <div class="container-fluid">
+        <div class="row d-md-flex justify-content-md-center">
+
+
+
+
+            <div class="form-group col-5 mt-5">
+                <label asp-for="FacebookUrl">FacebookUrl</label>
+                <input asp-for="FacebookUrl" class="form-control" placeholder="Enter FacebookUrl">
+                <span asp-validation-for="FacebookUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group col-5 mt-5">
+                <label asp-for="InstagramUrl">InstagramUrl</label>
+                <input asp-for="InstagramUrl" class="form-control" placeholder="Enter InstagramUrl">
+                <span asp-validation-for="InstagramUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group col-5 mt-5">
+                <label asp-for="TwitterUrl">TwitterUrl</label>
+                <input asp-for="TwitterUrl" class="form-control" placeholder="Enter TwitterUrl">
+                <span asp-validation-for="TwitterUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group col-5 mt-5">
+                <label asp-for="YoutubeUrl">YoutubeUrl</label>
+                <input asp-for="YoutubeUrl" class="form-control" placeholder="Enter YoutubeUrl">
+                <span asp-validation-for="YoutubeUrl" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group col-5 mt-5">
+                <label asp-for="SupportPhone">SupportPhone</label>
+                <input asp-for="SupportPhone" class="form-control" placeholder="Enter SupportPhone">
+                <span asp-validation-for="SupportPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group col-5 mt-5">
+                <label asp-for="SupportEmail">SupportEmail</label>
+                <input asp-for="SupportEmail" class="form-control" placeholder="Enter SupportEmail">
+                <span asp-validation-for="SupportEmail" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group col-5 mt-5">
+                <label asp-for="Address">Address</label>
+                <input asp-for="Address" class="form-control" placeholder="Enter Address">
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group col-5 mt-5">
+                <label asp-for="FooterText">FooterText</label>
+                <input asp-for="FooterText" class="form-control" placeholder="Enter FooterText">
+                <span asp-validation-for="FooterText" class="text-danger"></span>
+            </div>
+            <div class="form-group col-5 mt-5">
+                <label asp-for="FAX">FAX</label>
+                <input asp-for="FAX" class="form-control" placeholder="Enter FAX">
+                <span asp-validation-for="FAX" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="container-fluid d-flex justify-content-center mt-5">
+        <button type="submit" class="btn btn-success"><i class="fa-solid fa-plus"></i>Submit!</button>
+    </div>
+</form>

@@ -1,0 +1,71 @@
+﻿@model Blog
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form method="post" enctype="multipart/form-data">
+
+    <div class="container-fluid">
+        <div class="row d-md-flex justify-content-md-center">
+            <div class="form-group col-5 mt-5">
+                <label asp-for="Title">Blog Title<span class="text-danger">*</span></label>
+                <input asp-for="Title" class="form-control" placeholder="Enter Blog Title">
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group col-5 mt-5">
+                <label asp-for="Description">Blog Description<span class="text-danger">*</span></label>
+                <input asp-for="Description" class="form-control" placeholder="Enter Blog Description">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group col-5 mt-5">
+                <label asp-for="SubTitle">Blog SubTitle</label>
+                <input asp-for="SubTitle" class="form-control" placeholder="Enter Blog SubTitle">
+                <span asp-validation-for="SubTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group col-5 mt-5">
+                <label asp-for="SubDescription">Blog SubDescription</label>
+                <input asp-for="SubDescription" class="form-control" placeholder="Enter Blog SubDescription">
+                <span asp-validation-for="SubDescription" class="text-danger"></span>
+            </div>
+            <div class="row d-md-flex justify-content-md-center">
+
+                <div class="form-group col-3 mx-5 mt-5">
+                    <label class="d-md-flex justify-content-md-center " asp-for="PosterImage">Poster Image<span class="text-danger">*</span></label>
+                    <div id="Posterdropzone">
+                        <input asp-for=PosterImage type="file" accept="image/png,image/jpeg, application/pdf" />
+                    </div>
+                    <span asp-validation-for="PosterImage" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group col-3 mx-5 mt-5">
+                    <label class="d-md-flex justify-content-md-center " asp-for="SliderImage"> SliderImage<span class="text-danger">*</span></label>
+                    <div id="dropzone">
+                        <input asp-for=SliderImage multiple="multiple" type="file" accept="image/png,image/jpeg, application/pdf" />
+                    </div>
+                    <span asp-validation-for="SliderImage" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-3 mx-5 mt-5">
+                    <label class="d-md-flex justify-content-md-center " asp-for="Images"> Image<span class="text-danger">*</span></label>
+                    <div id="dropzone">
+                        <input asp-for=Images multiple="multiple" type="file" accept="image/png,image/jpeg, application/pdf" />
+                    </div>
+                    <span asp-validation-for="Images" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container-fluid d-flex justify-content-center mt-5">
+                <div class="form-group">
+                    <label asp-for="BlogTagId">Blog Tag:</label>
+                    <select asp-for="BlogTagId" asp-items="@(new SelectList(ViewBag.Tags,"Id","Name"))"></select>
+                    <span class="text-danger" asp-validation-for="BlogTagId"></span>
+                </div>
+            </div>
+    <div class="container-fluid d-flex justify-content-center mt-5">
+        <button type="submit" class="btn btn-success"><i class="fa-solid fa-plus"></i>Submit!</button>
+    </div>
+</form>
+

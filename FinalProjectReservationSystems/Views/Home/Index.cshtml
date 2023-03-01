@@ -1,0 +1,228 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<!-- Hero Section Begin -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="hero-text">
+                    @foreach (var sliderSetting in Model?.sliderSettings)
+                    {
+                        <h1>@sliderSetting?.Title</h1>
+                        <p>
+                            @sliderSetting?.Description
+                        </p>
+                        <a href="@sliderSetting?.ButtonUrl" class="primary-btn">@sliderSetting?.ButtonText</a>
+                    }
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
+                <div class="booking-form">
+                    <h3>Search Hotel Room</h3>
+                    <form method="post">
+                        <div class="check-date">
+                            <label for="date-out">Check In:</label>
+                            <input asp-for="CheckIn" asp-format="{0:dd/MM/yyyy HH:mm}" type="date" class="form-control">
+                        </div>
+                        <span class="text-danger"></span>
+                        <div class="check-date">
+                            <label for="date-out">Check Out:</label>
+                            <input asp-for="CheckOut" asp-format="{0:MM/dd/yyyy HH:mm}" type="date" class="form-control">
+                        </div>
+                        <div class="select-option">
+                            <label for="guest">Guests:</label>
+                            <input asp-for="Person">
+                        </div>
+                        <div class="select-option">
+                            <label for="guest">Minimum Price (/pernight):</label>
+                            <input asp-for="minPrice">
+                        </div>
+                        <div class="select-option">
+                            <label for="guest">Maximum Price (/pernight):</label>
+                            <input asp-for="maxPrice">
+                        </div>
+                        <button asp-action="index" asp-controller="home" type="submit">Search Room</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-slider owl-carousel">
+        @foreach (var slider in Model.Sliders)
+        {
+            <div class="hs-item set-bg" data-setbg="../uploads/sliders/@slider.ImageUrl"></div>
+        }
+    </div>
+</section>
+<!-- Hero Section End -->
+@if (Model.FindRoom != null && Model.FindRoom?.Count > 0)
+{
+    <section class="hp-room-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 mt-3">
+                    <div class="section-title">
+                        <span>Rooms</span>
+                        <h2>Founded Room</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="hp-room-items">
+                <div class="row">
+                    @foreach (var room in Model.FindRoom.Take(4))
+                    {
+                        <div class="col-lg-3 col-md-6">
+                            <div class="hp-room-item set-bg" data-setbg="../uploads/rooms/@room.PosterImgUrl">
+                                <div class="hr-text bg-dark opacity-75" style="border-radius:10px;">
+                                    <h3>@room.Name</h3>
+                                    <h2>@room.Price$<span>/Pernight</span></h2>
+                                    <table style="table-layout:fixed">
+                                        <tbody>
+                                            <tr>
+                                                <td style="white-space:nowrap" class="r-o">Size: @room.Size ft</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="white-space:nowrap" class="r-o">Capacity: @room.Capacity max persion</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="white-space:nowrap" class="r-o">Bed: @room.BedType</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="r-o">
+                                                    Services:
+                                                    @foreach (var services in Model.roomServices.Where(x => x.RoomId == room.Id).Take(2))
+                                                    {
+                                                        <span class="bg-dark">@services.Service.Name /</span>
+                                                    }
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <a asp-action="details" asp-controller="room" asp-route-id="@room.Id" class="primary-btn">More Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<!-- Services Section End -->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 mt-3">
+                <div class="section-title">
+                    <span>What We Do</span>
+                    <h2>Discover Our Services</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var service in Model.Services.Take(6))
+            {
+                <div class="col-lg-4 col-sm-6">
+                    <div class="service-item">
+                        @Html.Raw(service.Icon)
+                        <h4>@service.Name</h4>
+                        <p>
+                            @service.Description
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="d-flex justify-content-center" style="margin-top:50px; padding-bottom:50px">
+                <a asp-action="index" asp-controller="service" class="primary-btn about-btn text-black-50">Show More Services</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Services Section End -->
+<!-- Home Room Section Begin -->
+<section class="hp-room-section">
+    <div class="container-fluid">
+        <div class="hp-room-items">
+            <div class="row">
+                @foreach (var room in Model.Rooms.Take(4))
+                {
+                    <div class="col-lg-3 col-md-6">
+                        <div class="hp-room-item set-bg" data-setbg="../uploads/rooms/@room.PosterImgUrl">
+                            <div class="hr-text bg-dark opacity-75" style="border-radius:10px;">
+                                <h3>@room.Name</h3>
+                                <h2>@room.Price$<span>/Pernight</span></h2>
+                                <table style="table-layout:fixed">
+                                    <tbody>
+                                        <tr>
+                                            <td style="white-space:nowrap" class="r-o">Size: @room.Size ft</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="white-space:nowrap" class="r-o">Capacity: @room.Capacity max persion</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="white-space:nowrap" class="r-o">Bed: @room.BedType</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">
+                                                Services:
+                                                @foreach (var services in Model.roomServices.Where(x => x.RoomId == room.Id).Take(2))
+                                                {
+                                                    <span>@services.Service.Name /</span>
+                                                }
+                                                @if (Model.roomServices.Where(x => x.RoomId == room.Id).Count() > 2)
+                                                {
+                                                <span> more... </span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <a asp-action="details" asp-controller="room" asp-route-id="@room.Id" class="primary-btn">More Details</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="d-flex justify-content-center" style="margin-top:50px">
+                <a asp-action="index" asp-controller="room" class="primary-btn about-btn text-black-50">Discover More</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Home Room Section End -->
+<!-- Blog Section Begin -->
+<section class="blog-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <span>Hotel News</span>
+                    <h2>Our Blog</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model.Blogs.OrderByDescending(x => x.Id).Take(3))
+            {
+                <div class="col-lg-4">
+                    <div class="blog-item set-bg" data-setbg="./uploads/blogs/@item.BlogImages.Where(x => x.IsPoster == true).FirstOrDefault(x => x.BlogId == item.Id)?.ImageUrl">
+                        <div class="bi-text">
+                            <span class="b-tag">@item.BlogTag.Name</span>
+                            <h4><a asp-action="details" asp-controller="blog" asp-route-id="@item.Id">@item.Title</a></h4>
+                            <div class="b-time"><i class="icon_clock_alt"></i> @item.Date.ToString("dd MMMM yyyy")</div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- Blog Section End -->

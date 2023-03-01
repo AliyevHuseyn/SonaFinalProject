@@ -1,0 +1,40 @@
+﻿@model List<Service>
+
+
+
+
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>Discover Our Services</h2>
+                    <div class="bt-option">
+                        <a asp-action="index" asp-controller="home">Home</a>
+                        <span>Services</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section>
+    <div class="container">
+        <div class="row mb-5">
+            @foreach (var service in Model)
+            {
+                <div class="col-lg-4 col-sm-6">
+                    <div class="service-item">
+                        @Html.Raw(service.Icon)
+                        <h4>@service.Name</h4>
+                        <p>
+                            @service.Description
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+

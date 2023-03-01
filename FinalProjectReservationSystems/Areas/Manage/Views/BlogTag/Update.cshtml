@@ -1,0 +1,22 @@
+﻿@model BlogTag
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Update a Blog Tag:</h1>
+
+<form method="post">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="form-group col-5">
+                <label asp-for="Name">Blog Tag:</label>
+                <input asp-for="Name" class="form-control" placeholder="Enter Blog Tag">
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid d-flex justify-content-center mt-5">
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Submit!</button>
+    </div>
+</form>
+

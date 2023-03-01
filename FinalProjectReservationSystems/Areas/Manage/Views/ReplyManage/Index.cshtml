@@ -1,0 +1,45 @@
+﻿@model List<CommentReply>
+@{
+    ViewData["Title"] = "Index";
+    int count = 0;
+}
+
+<link href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+<div class="container" style="display:flex; justify-content:space-between; align-items:center">
+    <div>
+        <h1>Index <strong>Message</strong></h1>
+    </div>
+</div>
+
+<div class="container" style="margin-top:5px">
+    <table class="table" id="index">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Client Full Name</th>
+                <th scope="col">Client Comment</th>
+                <th scope="col">Client Profil Photo</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reply in Model)
+            {
+                count++;
+                <tr>
+                    <th scope="row">@count</th>
+                    <td> @reply.Fullname </td>
+                    <td> @reply.Text </td>
+                    <td>
+                        <img src="~/uploads/profilPhotos/@reply.ProfilPhoto" width="150" height="100">
+                    </td>
+                    <td>
+                        <a asp-action="details" asp-controller="replyManage" asp-route-id="@reply.Id" type="button" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i>Detail!</a>
+                        <a asp-action="delete" asp-controller="replyManage" asp-route-id="@reply.Id" type="button" class="btn btn-danger item-delete-btn"><i class="fa-solid fa-trash"></i>Delete!</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,44 @@
+﻿@model List<Blog>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+    <!-- Breadcrumb Section Begin -->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>Blog</h2>
+                        <div class="bt-option">
+                        <a asp-action="index" asp-controller="home">Home</a>
+                            <span>Blogs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section End -->
+    <!-- Blog Section Begin -->
+    <section class="blog-section blog-page spad">
+        <div class="container">
+            <div class="row">
+            @foreach (var blog in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog-item set-bg" data-setbg="../uploads/blogs/@blog.BlogImages.Where(x => x.IsPoster == true).FirstOrDefault(x => x.BlogId == blog.Id)?.ImageUrl">
+                        <div class="bi-text">
+                            <span class="b-tag">@blog.BlogTag.Name</span>
+                            <h4><a asp-action="details" asp-controller="blog" asp-route-id="@blog.Id">@blog.Title</a></h4>
+                            <div class="b-time"><i class="icon_clock_alt"></i> @blog.Date.ToString("dd MMMM yyyy")</div>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+

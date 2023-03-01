@@ -1,0 +1,119 @@
+﻿@model CheckoutViewModel
+
+<script src="https://jsuites.net/v4/jsuites.js"></script>
+<script src="https://jsuites.net/v4/jsuites.webcomponents.js"></script>
+<link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+
+
+
+<!-- Breadcrumb Section Begin -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>Our Rooms</h2>
+                    <div class="bt-option">
+                        <a asp-action="index" asp-controller="home">Home</a>
+                        <span>Rooms</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section End -->
+<!-- Room Details Section Begin -->
+<section class="room-details-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="room-details-item">
+                    <img width="500px" src="~/uploads/rooms/@Model.room.DetailImgUrl" alt="">
+                    <div class="rd-text">
+                        <div class="rd-title">
+                            <h3>@Model.room.Name</h3>
+                        </div>
+                        <h2>@Model.room.Price$<span>/Pernight</span></h2>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="r-o">Size:</td>
+                                    <td>@Model.room.Size ft</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Capacity:</td>
+                                    <td>Max persion @Model.room.Capacity</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Bed:</td>
+                                    <td>@Model.room.BedType</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Services:</td>
+                                    <td style="white-space:nowrap">
+                                        @foreach (var service in Model.room.roomServices)
+                                        {
+
+                                            <span> @service.Service.Name /</span>
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="f-para">
+                            @Model.room.Description
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-4">
+                <div class="room-booking">
+                    <h3>Your Reservation</h3>
+                    <form method="post">
+                        <div class="check-date">
+                            <label for="date-out">Check In:</label>
+                            <input asp-for="order.CheckIn" asp-format="{0:dd/MM/yyyy HH:mm}" type="date" class="form-control">
+                            <span asp-validation-for="order.CheckIn" class="text-danger"></span>
+                        </div>
+                        <span class="text-danger"></span>
+                        <div class="check-date">
+                            <label for="date-out">Check Out:</label>
+                            <input asp-for="order.CheckOut" asp-format="{0:MM/dd/yyyy HH:mm}" type="date" class="form-control">
+                            <span asp-validation-for="order.CheckOut" class="text-danger"></span>
+                        </div>
+                        <span class="text-danger"></span>
+                        <div class="select-option">
+                            <label for="guest">Guests:</label>
+                            <select asp-for="order.Person" id="guest">
+                                <option value="0">Person</option>
+                                @for (int i = 1; i < Model.room.Capacity+1; i++)
+                                {
+                                    <option value="@i">@i Person</option>
+                                }
+                            </select>
+                            <span asp-validation-for="order.Person" class="text-danger"></span>
+                        </div>
+                        @if(!User.Identity.IsAuthenticated)
+                        {
+                            <button asp-action="index" asp-controller="checkout" asp-route-id="@Model.room.Id" type="submit" disabled>Check Availability</button>
+                            <span class="text-warning">If you want book this room please login or register</span>
+                        }
+                        else
+                        {
+                            <button asp-action="index" asp-controller="checkout" asp-route-id="@Model.room.Id" type="submit">Check Availability</button>
+                            <span asp-validation-for="order.Aviable" class="text-danger"></span>
+                            <button asp-action="confirm" asp-controller="checkout" asp-route-id="@Model.room.Id" type="submit">Confirm Reservation</button>
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Room Details Section End -->
+
+

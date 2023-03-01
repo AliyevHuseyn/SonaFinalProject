@@ -1,0 +1,27 @@
+﻿@using FinalProjectReservationSystems.Areas.ViewModel.Order;
+@model BannedOrderSendMailViewModel
+@{
+    ViewData["Title"] = "Send";
+}
+<form method="post" asp-action="send">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="form-group col-lg-6">
+                <label asp-for="Subject">Email Subject</label>
+                <input asp-for="Subject" class="form-control" placeholder="Enter Email Subject">
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group col-lg-6">
+                <label asp-for="Body">Email Text</label>
+                <input asp-for="Body" class="form-control" placeholder="Enter Email Text">
+                <span asp-validation-for="Body" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid d-flex justify-content-center mt-5">
+        <button type="submit" class="btn btn-warning"><i class="fa-solid fa-paper-plane-top"></i>Send!</button>
+    </div>
+
+</form>
+

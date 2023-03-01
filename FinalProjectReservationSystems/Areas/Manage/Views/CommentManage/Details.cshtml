@@ -1,0 +1,25 @@
+﻿@model Comment
+@{
+    ViewData["Title"] = "Details";
+}
+
+<form>
+    <div class="container">
+        <div class="row">
+            <div class="form-group col-lg-6">
+                <label asp-for="Fullname">Client User Name</label>
+                <input class="form-control" type="text" placeholder="@Model.Fullname" readonly>
+            </div>
+            <div class="form-group col-lg-6">
+                <label asp-for="Text">Client Comment Text</label>
+                <textarea readonly class="form-control" type="text">
+                    @Model.Text
+                </textarea>
+            </div>
+            <div class="form-group col-lg-6">
+                <label asp-for="ProfilPhoto">Client Profil Photo</label>
+                <img src="~/uploads/profilPhotos/@Model.ProfilPhoto" width="300" height="200">
+            </div>
+        </div>
+    </div>
+</form>

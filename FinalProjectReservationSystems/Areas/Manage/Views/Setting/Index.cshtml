@@ -1,0 +1,42 @@
+﻿@model List<Setting>
+@{
+    ViewData["Title"] = "Index";
+    int count = 0;
+}
+
+<link href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+
+<div class="container" style="display:flex; justify-content:space-between; align-items:center">
+
+    <div>
+        <h1>Index <strong>Setting</strong></h1>
+    </div>
+    <div>
+        <a asp-action="update" asp-controller="setting" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Update!</a>
+    </div>
+
+</div>
+
+<div class="container" style="margin-top:5px">
+    <table class="table" id="index">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Key</th>
+                <th scope="col">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var setting in Model)
+            {
+                count++;
+                <tr>
+                    <td>@count</td>
+                    <td>@setting.Key</td>
+                    <td>@setting.Value"</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

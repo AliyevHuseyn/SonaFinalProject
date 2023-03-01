@@ -1,0 +1,84 @@
+﻿@inject FinalProjectReservationSystems.Services.LayoutService service;
+@model myAccountViewModel
+@{
+    ViewData["Title"] = "myAccount";
+    Layout = null;
+    AppUser? user = await service.GetUser();
+}
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <title>My Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="~/account/css/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.css" integrity="sha512-VSD3lcSci0foeRFRHWdYX4FaLvec89irh5+QAGc00j5AOdow2r5MFPhoPEYBUQdyarXwbzyJEO7Iko7+PnPuBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/img/sona-icon.png">
+
+
+</head>
+<body class="img js-fullheight" style="background-image: url(../account/images/register-hotel-light-bg.jpeg);">
+    <div class="container-fluid">
+        <div class="row h-1000 align-items-center justify-content-center" style="min-height: 50vh;">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                <div class=" rounded bg-dark rounded p-4 p-sm-5 my-4 mx-3">
+                    <form asp-action="myAccount" class="signin-form" method="post" enctype="multipart/form-data">
+                        <div class="form-group d-flex flex-column align-items-center justify-content-center">
+                            <span style="font-weight: bold;" class="text-dark bg-white d-block rounded">Choose New Profil Photo</span>
+                            <label for="profil-photo"><i class="fa-sharp fa-solid fa-image-portrait fa-xl"></i></label>
+                            <input id="profil-photo" asp-for="newProfilPhotoFile" placeholder="ProfilPhoto" style="display:none;visibility:hidden;">
+                            <span style="font-weight: bold;" class="text-danger bg-white d-md-flex justify-content-md-center rounded" asp-validation-for="newProfilPhotoFile"></span>
+                            <img width="100px" src="~/uploads/profilPhotos/@user.ProfilPhotoUrl" />
+
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="NewUserName" class="form-control" placeholder="New Username">
+                            <span style="font-weight: bold;" class="text-danger bg-white d-md-flex justify-content-md-center rounded" asp-validation-for="NewUserName"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="NewFullName" class="form-control" placeholder="New Fullname">
+                            <span style="font-weight: bold;" class="text-danger bg-white d-md-flex justify-content-md-center rounded" asp-validation-for="NewFullName"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="NewEmail" class="form-control" placeholder="New Email">
+                            <span style="font-weight: bold;" class="text-danger bg-white d-md-flex justify-content-md-center rounded" asp-validation-for="NewEmail"></span>
+                        </div>
+                        <div class="form-group">
+                            <input id="password-field" asp-for="Security" class="form-control" placeholder="Password" required>
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                        </div>
+                        <span style="font-weight: bold;" class="text-danger bg-white d-md-flex justify-content-md-center rounded" asp-validation-for="Security"></span>
+                        <div class="form-group">
+                            <button type="submit" class="form-control btn btn-primary submit px-3">Change !</button>
+                        </div>
+                    </form>
+                    <hr>
+                    <a class="d-md-flex justify-content-md-center" asp-action="index" asp-controller="home" rounded">Back to site!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/account/js/jquery.min.js"></script>
+    <script src="~/account/js/popper.js"></script>
+    <script src="~/account/js/bootstrap.min.js"></script>
+    <script src="~/account/js/main.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.js" integrity="sha512-MnKz2SbnWiXJ/e0lSfSzjaz9JjJXQNb2iykcZkEY2WOzgJIWVqJBFIIPidlCjak0iTH2bt2u1fHQ4pvKvBYy6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @await Component.InvokeAsync("NToastNotify");
+
+</body>
+</html>
+
+

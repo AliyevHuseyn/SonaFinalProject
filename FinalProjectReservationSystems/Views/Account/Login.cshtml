@@ -1,0 +1,93 @@
+﻿ @model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="~/account/css/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.css" integrity="sha512-VSD3lcSci0foeRFRHWdYX4FaLvec89irh5+QAGc00j5AOdow2r5MFPhoPEYBUQdyarXwbzyJEO7Iko7+PnPuBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/img/sona-icon.png">
+
+
+</head>
+<body class="img js-fullheight" style="background-image: url(../account/images/login-hotel-bg.jpeg);">
+    <div class="container-fluid">
+        <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                <div class=" rounded bg-dark rounded p-4 p-sm-5 my-4 mx-3">
+                    <div class="d-flex align-items-center justify-content-center mb-3">
+                        <h3 style="color:white;">Welcome Back!</h3>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center mb-3">
+                        <h3 style="color:white;">Have an account?</h3>
+                    </div>
+                    <form asp-action="login" class="signin-form" method="post">
+
+                        <div class="form-group">
+                            <input asp-for="userName" class="form-control" placeholder="Username">
+                            <span asp-validation-for="userName" class="text-danger bg-white"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Password" id="password-field" class="form-control" placeholder="Password">
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <hr>
+                        <div class="form-group">
+                            <div asp-validation-summary="ModelOnly" class="text-danger bg-white"></div>
+                            <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
+                        </div>
+                        <div class="form-group d-md-flex">
+                            <div class="w-50">
+                                <label class="checkbox-wrap checkbox-primary">
+                                    Remember Me
+                                    <input asp-for="RememberMe" type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="w-50 text-md-right">
+                                <a asp-action="forgotpassword" asp-controller="account" style="color: #fff">Forgot Password</a>
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+                    <div class="text-center">
+                        <a class="small" asp-action="register" asp-controller="account">Create an Account!</a>
+                    </div>
+                    <hr>
+                    <p style="color:white;" class=" w-100 text-center">&mdash; Or Sign In With &mdash;</p>
+                    <div class="container-fluid d-flex justify-content-center">
+                        <a asp-action="GoogleLogin" class="py-2 ml-md-1 rounded"><i class="fa-brands fa-google"></i> Google</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/account/js/jquery.min.js"></script>
+    <script src="~/account/js/popper.js"></script>
+    <script src="~/account/js/bootstrap.min.js"></script>
+    <script src="~/account/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.js" integrity="sha512-MnKz2SbnWiXJ/e0lSfSzjaz9JjJXQNb2iykcZkEY2WOzgJIWVqJBFIIPidlCjak0iTH2bt2u1fHQ4pvKvBYy6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @await Component.InvokeAsync("NToastNotify");
+</body>
+</html>
+
+

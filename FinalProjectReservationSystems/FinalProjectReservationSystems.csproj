@@ -1,0 +1,168 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>c1ed4a41-b84b-4c74-a4e0-c1fd6bad01ac</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\uploads\sliders\SliderController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.12" />
+    <PackageReference Include="NToastNotify" Version="8.0.0" />
+    <PackageReference Include="QRCoder" Version="1.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\blogs\" />
+    <Folder Include="wwwroot\uploads\rooms\" />
+    <Folder Include="wwwroot\uploads\sliders\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\additional\fonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\additional\fonts\fa-duotone-900.woff2" />
+    <None Include="wwwroot\additional\fonts\fa-light-300.woff2" />
+    <None Include="wwwroot\additional\fonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\additional\fonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\additional\fonts\fa-thin-100.woff2" />
+    <None Include="wwwroot\additional\fonts\fa-v4compatibility.woff2" />
+    <None Include="wwwroot\additional\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\additional\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\additional\fonts\Simple-Line-Icons.svg" />
+    <None Include="wwwroot\additional\fonts\Simple-Line-Icons.woff2" />
+    <None Include="wwwroot\additional\images\background\f-bottom-bg.svg" />
+    <None Include="wwwroot\additional\images\icons\arrow-left.svg" />
+    <None Include="wwwroot\additional\images\icons\arrow-right-o.svg" />
+    <None Include="wwwroot\additional\images\icons\arrow-right.svg" />
+    <None Include="wwwroot\additional\images\icons\arrow-up.svg" />
+    <None Include="wwwroot\additional\images\icons\banned.svg" />
+    <None Include="wwwroot\additional\images\icons\bill.svg" />
+    <None Include="wwwroot\additional\images\icons\buy-treker.svg" />
+    <None Include="wwwroot\additional\images\icons\calendar.svg" />
+    <None Include="wwwroot\additional\images\icons\campings.svg" />
+    <None Include="wwwroot\additional\images\icons\cart-icon.svg" />
+    <None Include="wwwroot\additional\images\icons\category-icon.svg" />
+    <None Include="wwwroot\additional\images\icons\close-menu.svg" />
+    <None Include="wwwroot\additional\images\icons\coupon-icon.svg" />
+    <None Include="wwwroot\additional\images\icons\duration.svg" />
+    <None Include="wwwroot\additional\images\icons\email-1.svg" />
+    <None Include="wwwroot\additional\images\icons\events.svg" />
+    <None Include="wwwroot\additional\images\icons\heart-icon-1.svg" />
+    <None Include="wwwroot\additional\images\icons\heart-icon.svg" />
+    <None Include="wwwroot\additional\images\icons\hill.svg" />
+    <None Include="wwwroot\additional\images\icons\key.svg" />
+    <None Include="wwwroot\additional\images\icons\kitchen-tool.svg" />
+    <None Include="wwwroot\additional\images\icons\lights.svg" />
+    <None Include="wwwroot\additional\images\icons\loc-hover.svg" />
+    <None Include="wwwroot\additional\images\icons\loc.svg" />
+    <None Include="wwwroot\additional\images\icons\location-1.svg" />
+    <None Include="wwwroot\additional\images\icons\location.svg" />
+    <None Include="wwwroot\additional\images\icons\logo-icon.svg" />
+    <None Include="wwwroot\additional\images\icons\menu-icon.svg" />
+    <None Include="wwwroot\additional\images\icons\menu.svg" />
+    <None Include="wwwroot\additional\images\icons\passport.svg" />
+    <None Include="wwwroot\additional\images\icons\phone-1.svg" />
+    <None Include="wwwroot\additional\images\icons\phone-call.svg" />
+    <None Include="wwwroot\additional\images\icons\preloader.svg" />
+    <None Include="wwwroot\additional\images\icons\printer.svg" />
+    <None Include="wwwroot\additional\images\icons\queue.svg" />
+    <None Include="wwwroot\additional\images\icons\quote-icon.svg" />
+    <None Include="wwwroot\additional\images\icons\quotes-1.svg" />
+    <None Include="wwwroot\additional\images\icons\quotes-2.svg" />
+    <None Include="wwwroot\additional\images\icons\quotes-3.svg" />
+    <None Include="wwwroot\additional\images\icons\quotes-4.svg" />
+    <None Include="wwwroot\additional\images\icons\review-icon.svg" />
+    <None Include="wwwroot\additional\images\icons\search-icon.svg" />
+    <None Include="wwwroot\additional\images\icons\share-icon.svg" />
+    <None Include="wwwroot\additional\images\icons\ship.svg" />
+    <None Include="wwwroot\additional\images\icons\smoking.svg" />
+    <None Include="wwwroot\additional\images\icons\speedometer.svg" />
+    <None Include="wwwroot\additional\images\icons\team-group.svg" />
+    <None Include="wwwroot\additional\images\icons\ticket.svg" />
+    <None Include="wwwroot\additional\images\icons\title-vector-2.svg" />
+    <None Include="wwwroot\additional\images\icons\title-vector.svg" />
+    <None Include="wwwroot\additional\images\icons\toilet.svg" />
+    <None Include="wwwroot\additional\images\icons\tour-guide.svg" />
+    <None Include="wwwroot\additional\images\icons\travel-insurance.svg" />
+    <None Include="wwwroot\additional\images\icons\video-icon-1.svg" />
+    <None Include="wwwroot\additional\images\icons\video-icon-2.svg" />
+    <None Include="wwwroot\additional\images\icons\wifi-signal.svg" />
+    <None Include="wwwroot\additional\images\icons\zoom-2.svg" />
+    <None Include="wwwroot\additional\images\icons\zoom-icon.svg" />
+    <None Include="wwwroot\additional\images\logo.svg" />
+    <None Include="wwwroot\additional\images\main-slider\banner-bg-text.svg" />
+    <None Include="wwwroot\additional\images\main-slider\banner-image-1.svg" />
+    <None Include="wwwroot\additional\images\main-slider\banner-image-2.svg" />
+    <None Include="wwwroot\additional\images\main-slider\banner-image-3.svg" />
+    <None Include="wwwroot\additional\images\main-slider\banner-image-4.svg" />
+    <None Include="wwwroot\additional\images\main-slider\banner-stones-left.svg" />
+    <None Include="wwwroot\additional\images\main-slider\banner-stones-right.svg" />
+    <None Include="wwwroot\additional\images\resource\404-cloud-left.svg" />
+    <None Include="wwwroot\additional\images\resource\404-cloud-right.svg" />
+    <None Include="wwwroot\additional\images\resource\404-image.svg" />
+    <None Include="wwwroot\additional\images\resource\about-icon-1.svg" />
+    <None Include="wwwroot\additional\images\resource\about-icon-2.svg" />
+    <None Include="wwwroot\additional\images\resource\about-image-1.svg" />
+    <None Include="wwwroot\additional\images\resource\about-image-3.svg" />
+    <None Include="wwwroot\additional\images\resource\about-stone-right.svg" />
+    <None Include="wwwroot\additional\images\resource\about-stone-two.svg" />
+    <None Include="wwwroot\additional\images\resource\asia-map.svg" />
+    <None Include="wwwroot\additional\images\resource\europe-map.svg" />
+    <None Include="wwwroot\additional\images\resource\f-icon-1.svg" />
+    <None Include="wwwroot\additional\images\resource\f-icon-2.svg" />
+    <None Include="wwwroot\additional\images\resource\f-icon-3.svg" />
+    <None Include="wwwroot\additional\images\resource\f-icon-4.svg" />
+    <None Include="wwwroot\additional\images\resource\faq-image-1.svg" />
+    <None Include="wwwroot\additional\images\resource\floated-icon-right-2.svg" />
+    <None Include="wwwroot\additional\images\resource\footer-stones.svg" />
+    <None Include="wwwroot\additional\images\resource\hills-image-2.svg" />
+    <None Include="wwwroot\additional\images\resource\hills-image.svg" />
+    <None Include="wwwroot\additional\images\resource\icon-1.svg" />
+    <None Include="wwwroot\additional\images\resource\icon-2.svg" />
+    <None Include="wwwroot\additional\images\resource\icon-3.svg" />
+    <None Include="wwwroot\additional\images\resource\icon-4.svg" />
+    <None Include="wwwroot\additional\images\resource\icon-5.svg" />
+    <None Include="wwwroot\additional\images\resource\icon-6.svg" />
+    <None Include="wwwroot\additional\images\resource\newsletter-image.svg" />
+    <None Include="wwwroot\additional\images\resource\north-america-map.svg" />
+    <None Include="wwwroot\additional\images\resource\plant-icon.svg" />
+    <None Include="wwwroot\additional\images\resource\stones-alt.svg" />
+    <None Include="wwwroot\additional\images\resource\stones-left.svg" />
+    <None Include="wwwroot\additional\images\resource\stones-right-2.svg" />
+    <None Include="wwwroot\additional\images\resource\stones-right-3.svg" />
+    <None Include="wwwroot\additional\images\resource\stones-right.svg" />
+    <None Include="wwwroot\additional\images\resource\team-icon-left.svg" />
+    <None Include="wwwroot\additional\images\resource\why-image-1.svg" />
+    <None Include="wwwroot\additional\images\resource\world-map.svg" />
+    <None Include="wwwroot\additional\js\appear.js" />
+    <None Include="wwwroot\additional\js\bootstrap.min.js" />
+    <None Include="wwwroot\additional\js\bxslider.js" />
+    <None Include="wwwroot\additional\js\countdown.js" />
+    <None Include="wwwroot\additional\js\custom-script.js" />
+    <None Include="wwwroot\additional\js\isotope.js" />
+    <None Include="wwwroot\additional\js\jquery-ui.js" />
+    <None Include="wwwroot\additional\js\jquery.fancybox.js" />
+    <None Include="wwwroot\additional\js\jquery.js" />
+    <None Include="wwwroot\additional\js\mixitup.js" />
+    <None Include="wwwroot\additional\js\odometer.js" />
+    <None Include="wwwroot\additional\js\owl.js" />
+    <None Include="wwwroot\additional\js\popper.min.js" />
+    <None Include="wwwroot\additional\js\touchspin.js" />
+    <None Include="wwwroot\additional\js\wow.js" />
+  </ItemGroup>
+
+</Project>

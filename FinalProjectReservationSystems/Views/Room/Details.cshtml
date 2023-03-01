@@ -1,0 +1,197 @@
+﻿@model RoomViewModel
+@{
+    ViewData["Title"] = "Details";
+    int count = 0;
+    float sum = Model.Reviews.Sum(x => x.Rating);
+    int reviewCount = Model.Reviews.Count();
+    bool check;
+    int fullStar;
+}
+
+<script src="https://jsuites.net/v4/jsuites.js"></script>
+<script src="https://jsuites.net/v4/jsuites.webcomponents.js"></script>
+<link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+
+
+
+<!-- Breadcrumb Section Begin -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>Our Rooms</h2>
+                    <div class="bt-option">
+                        <a asp-action="index" asp-controller="home">Home</a>
+                        <span>Rooms</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section End -->
+<!-- Room Details Section Begin -->
+<section class="room-details-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="room-details-item">
+                    <img width="5000px" src="~/uploads/rooms/@Model.Room.DetailImgUrl" alt="">
+                    <div class="rd-text">
+                        <div class="rd-title">
+                            <h3>@Model.Room.Name</h3>
+                            <div class="rdt-right">
+                                @if (reviewCount > 0)
+                                {
+                                    check = sum % reviewCount != 0;
+                                    fullStar = (int)sum / reviewCount;
+
+                                    @for (int i = 0; i < fullStar; i++)
+                                    {
+                                        <i class="icon_star"></i>
+                                    }
+                                    @if (check)
+                                    {
+                                        @for (int i = 0; i < 1; i++)
+                                        {
+                                            <i class="icon_star-half_alt"></i>
+                                        }
+                                        @for (int i = 0; i < 5 - (sum / reviewCount + 1); i++)
+                                        {
+                                            <i class="icon_star_alt"></i>
+                                        }
+
+                                    }
+                                    else
+                                        @for (int i = 0; i < 5 - (sum / reviewCount + (sum % reviewCount)); i++)
+                                        {
+                                            <i class="icon_star_alt"></i>
+                                        }
+                                }
+                                else
+                                {
+                                    <i class="icon_star_alt"></i>
+                                    <i class="icon_star_alt"></i>
+                                    <i class="icon_star_alt"></i>
+                                    <i class="icon_star_alt"></i>
+                                    <i class="icon_star_alt"></i>
+                                }
+                                <a asp-action="index" asp-controller="checkout" asp-route-id="@Model.Room.Id">Booking Now</a>
+                            </div>
+                        </div>
+                        <h2>@Model.Room.Price$<span>/Pernight</span></h2>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="r-o">Size:</td>
+                                    <td>@Model.Room.Size ft</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Capacity:</td>
+                                    <td>Max persion @Model.Room.Capacity</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Bed:</td>
+                                    <td>@Model.Room.BedType</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Services:</td>
+                                    <td style="white-space:nowrap">
+                                        @foreach (var service in Model.Room.roomServices)
+                                        {
+
+                                            <span> @service.Service.Name /</span>
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="f-para">
+                            @Model.Room.Description
+                        </p>
+                    </div>
+                </div>
+                <div class="rd-reviews">
+                    <h4>Reviews</h4>
+                    @foreach (var review in Model.Reviews)
+                    {
+                        count = (int)review.Rating / 1;
+
+                        <div class="review-item">
+                            <div class="ri-pic">
+                                <img src="~/uploads/profilPhotos/@review.ProfilPhotoUrl" alt="">
+                            </div>
+                            <div class="ri-text">
+                                <span>@review.dateTime.ToString("dd MMMM yyyy")</span>
+                                <div class="rating">
+                                    @for (int i = 0; i < count; i++)
+                                    {
+                                        <i class="icon_star"></i>
+                                    }
+                                    @for (int i = 0; i < 5 - review.Rating; i++)
+                                    {
+                                        <i class="icon_star_alt"></i>
+                                    }
+                                </div>
+                                <h5>@review.FullName</h5>
+                                <p>
+                                    @review.Description
+                                </p>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="review-add">
+                    <h4>Add Review</h4>
+                    <form class="ra-form" method="post">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input asp-for="FullName" type="text" placeholder="FullName*">
+                                <span asp-validation-for="FullName" class="text-danger d-block"></span>
+                            </div>
+                            <div class="col-lg-6">
+                                <input asp-for="Email" type="text" placeholder="Email*">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="col-lg-12">
+                                <div>
+                                    <h5>You Rating:</h5>
+                                    <jsuites-rating value="0" tooltip="Ugly, Bad, Average, Good, Outstanding"></jsuites-rating>
+                                    <span asp-validation-for="Rating" class="text-danger"></span>
+                                    <input asp-for="Rating" id="console" type="number" style="display:none;visibility:hidden" />
+                                </div>
+                                <textarea asp-for="Description" placeholder="Your Review"></textarea>
+                                <span asp-validation-for="Description" class="text-danger d-block text-center"></span>
+
+                                <div class="d-flex justify-content-center align-items-center flex-column">
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <button asp-action="details" asp-controller="room" asp-route-id="@Model.Room.Id" type="submit">Submit Now</button>
+                                    }
+                                    else
+                                    {
+                                        <button asp-action="details" asp-controller="room" asp-route-id="@Model.Room.Id" type="submit" disabled class="col-3">Submit Now</button>
+                                        <p class="text-warning">If you want review this room please login or register</p>
+                                    }
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Room Details Section End -->
+
+
+
+
+<script>
+    document.querySelector('jsuites-rating').addEventListener('onchange', function (e) {
+        document.getElementById('console').value = this.value;
+        console.log(document.getElementById('console').value);
+    });
+</script>

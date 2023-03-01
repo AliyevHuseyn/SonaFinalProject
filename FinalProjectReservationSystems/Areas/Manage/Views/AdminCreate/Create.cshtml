@@ -1,0 +1,52 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form method="post" enctype="multipart/form-data">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="form-group col-4 mt-5">
+                <label asp-for="FullName">Enter Admin Full Name<span class="text-danger">*</span></label>
+                <input asp-for="FullName" class="form-control" placeholder="Enter Admin Full Name">
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group col-4 mt-5">
+                <label asp-for="UserName">Enter Admin User Name<span class="text-danger">*</span></label>
+                <input asp-for="UserName" class="form-control" placeholder="Enter Admin User Name">
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group col-4 mt-5">
+                <label asp-for="Email">Enter Admin Email<span class="text-danger">*</span></label>
+                <input asp-for="Email" class="form-control" placeholder="Enter Admin Email">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row container-fluid d-flex justify-content-center">
+            <div class="form-group col-4 mt-5">
+                <label asp-for="Password">Enter Admin Password<span class="text-danger">*</span></label>
+                <input asp-for="Password" class="form-control" placeholder="Enter Admin Password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group col-4 mt-5">
+                <label asp-for="ConfirmPassword">Enter Admin Confirm Password<span class="text-danger">*</span></label>
+                <input asp-for="ConfirmPassword" class="form-control" placeholder="Enter Admin Confirm Password">
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group container-fluid d-flex justify-content-center mt-5 col-5">
+                <span style="font-weight: bold;" class="text-dark bg-white d-block rounded">Choose Profil Photo</span>
+                <label for="profil-photo"><i class="fa-sharp fa-solid fa-image-portrait fa-xl"></i></label>
+                <input id="profil-photo" asp-for="ProfilPhoto" placeholder="ProfilPhoto" style="display:none;visibility:hidden;">
+                <span style="font-weight: bold;" class="text-danger bg-white d-md-flex justify-content-md-center rounded" asp-validation-for="ProfilPhoto"></span>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid d-flex justify-content-center mt-5">
+        <button type="submit" class="btn btn-success"><i class="fa-solid fa-plus"></i>Submit!</button>
+    </div>
+</form>
+
+

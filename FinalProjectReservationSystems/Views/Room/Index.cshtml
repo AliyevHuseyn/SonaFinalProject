@@ -1,0 +1,69 @@
+﻿@model List<Room>
+@{
+    ViewData["Title"] = "Index";
+}
+<!-- Breadcrumb Section Begin -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>Our Rooms</h2>
+                    <div class="bt-option">
+                        <a asp-action="index" asp-controller="home">Home</a>
+                        <span>Rooms</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section End -->
+<!-- Rooms Section Begin -->
+<section class="rooms-section spad">
+    <div class="container">
+        <div class="row">
+
+            @foreach (var room in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="room-item">
+                        <img class="w-100" src="~/uploads/rooms/@room.PosterImgUrl" alt="">
+                        <div class="ri-text">
+                            <h4>@room.Name</h4>
+                            <h3>@room.Price$<span>/Pernight</span></h3>
+                            <table style="table-layout:fixed">
+                                <tbody>
+                                    <tr>
+                                        <td class="r-o">Size:</td>
+                                        <td style="white-space:nowrap">@room.Size ft</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Capacity:</td>
+                                        <td style="white-space:nowrap">Max persion 4</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Bed:</td>
+                                        <td style="white-space:nowrap">@room.BedType</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Services:</td>
+                                        <td style="white-space:nowrap">
+                                            @foreach (var service in room.roomServices.Where(x => x.RoomId == room.Id).Take(1))
+                                            {
+                                                <span> @service.Service.Name /</span>
+                                            }
+                                            <span> more... </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a asp-action="details" asp-controller="room" asp-route-id="@room.Id" class="primary-btn">More Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- Rooms Section End -->

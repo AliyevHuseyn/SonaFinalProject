@@ -1,0 +1,221 @@
+﻿@inject FinalProjectReservationSystems.Services.LayoutService service;
+@{
+
+    AppUser user = await service.GetUser();
+    List<ContactUsMessage> contactUsMessages = await service.GetMessage();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>SONA - Admin Panel</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="~/assets/img/sona-icon.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.css" integrity="sha512-VSD3lcSci0foeRFRHWdYX4FaLvec89irh5+QAGc00j5AOdow2r5MFPhoPEYBUQdyarXwbzyJEO7Iko7+PnPuBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="~/manage/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/manage/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="~/manage/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="~/manage/css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.1/sweetalert2.min.css" integrity="sha512-NvuRGlPf6cHpxQqBGnPe7fPoACpyrjhlSNeXVUY7BZAj1nNhuNpRBq3osC4yr2vswUEuHq2HtCsY2vfLNCndYA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class=" position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-light navbar-light">
+                <a href="@Url.Action("Index", "Home", new { area = "" })" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>SONA</h3>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <img class="rounded-circle" src="~/uploads/profilPhotos/@user.ProfilPhotoUrl" alt="" style="width: 40px; height: 40px;">
+                            <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                        }
+                        else
+                        {
+                            <img class="rounded-circle" src="~/uploads/profilPhotos/anonymousUserPP.png" alt="" style="width: 40px; height: 40px;">
+                            <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                        }
+                    </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="ms-3">
+                            <h6 class="mb-0">@user.FullName</h6>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="ms-3">
+                            <h6 class="mb-0">Sona</h6>
+                        </div>
+
+                    }
+                </div>
+                <div class="navbar-nav w-100">
+                    <a asp-action="index" asp-controller="dashboard" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>CRUD</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            @(User.IsInRole("SuperAdmin") ?  Html.Raw("<a asp-action='index'  href='/manage/adminCreate/Index' class='dropdown-item'>Admin Create</a>") : "")
+                                <a asp-action="index" asp-controller="slider" asp-area="manage" class="dropdown-item">Slider Image</a>
+                                <a asp-action="index" asp-controller="blogTag" asp-area="manage" class="dropdown-item">Blog Tag</a>
+                                <a asp-action="index" asp-controller="blog" asp-area="manage" class="dropdown-item">Blog</a>
+                                <a asp-action="index" asp-controller="faqManage" asp-area="manage" class="dropdown-item">FAQ</a>
+                                <a asp-action="index" asp-controller="roomManage" asp-area="manage" class="dropdown-item">Rooms</a>
+                                <a asp-action="index" asp-controller="service" asp-area="manage" class="dropdown-item">Service</a>
+                            
+
+
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-chart-bar me-2"></i>Manage</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a asp-action="index" asp-controller="contactManage" asp-area="manage" class="dropdown-item">Contact Us Manager</a>
+                            <a asp-action="index" asp-controller="commentManage" asp-area="manage" class="dropdown-item">Comment Manager</a>
+                            <a asp-action="index" asp-controller="replyManage" asp-area="manage" class="dropdown-item">Reply Manager</a>
+                            <a asp-action="index" asp-controller="reviewManage" asp-area="manage" class="dropdown-item">Review Manager</a>
+                            <a asp-action="index" asp-controller="order" asp-area="manage" class="dropdown-item">Order Manager</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-keyboard me-2"></i>Settings</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a asp-action="index" asp-controller="sliderSettings" asp-area="manage" class="dropdown-item">Slider Settings</a>
+                            <a asp-action="index" asp-controller="setting" asp-area="manage" class="dropdown-item">Settings</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+                </a>
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <form class="d-none d-md-flex ms-4">
+                    <input class="form-control border-0" type="search" placeholder="Search">
+                </form>
+                <div class="navbar-nav align-items-center ms-auto">
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-bell me-lg-2"></i>
+                            <span class="d-none d-lg-inline-flex">Notification</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+
+                            @foreach (var message in contactUsMessages.Where(x => x.Seen == false).Take(5).ToList())
+                            {
+                                <a asp-action="details" asp-controller="contactManage" asp-route-id="@message.Id" class="dropdown-item">
+                                    <h6 class="fw-normal mb-0">@message.ClientFullName</h6>
+                                    <small>@message.ClientMessageSubject</small>
+                                </a>
+                                <hr class="dropdown-divider">
+                            }
+                            <a asp-action="index" asp-controller="contactManage" asp-area="manage" class="dropdown-item text-center">See all notifications</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+                                <img class="rounded-circle me-lg-2" src="~/uploads/profilPhotos/@user.ProfilPhotoUrl" alt="" style="width: 40px; height: 40px;">
+                                <span class="d-none d-lg-inline-flex">@user.FullName</span>
+
+                            }
+                            else
+                            {
+                                <img class="rounded-circle me-lg-2" src="~/uploads/profilPhotos/anonymousUserPP.png" alt="" style="width: 40px; height: 40px;">
+                                <span class="d-none d-lg-inline-flex">Sona</span>
+                            }
+                        </a>
+                    </div>
+
+                </div>
+            </nav>
+            <!-- Navbar End -->
+            @RenderBody()
+
+        </div>
+        <!-- Content End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/manage/lib/chart/chart.min.js"></script>
+    <script src="~/manage/lib/easing/easing.min.js"></script>
+    <script src="~/manage/lib/waypoints/waypoints.min.js"></script>
+    <script src="~/manage/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="~/manage/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="~/manage/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="~/manage/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="~/manage/js/custom.js"></script>
+    <script src="~/manage/js/main.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.js" integrity="sha512-MnKz2SbnWiXJ/e0lSfSzjaz9JjJXQNb2iykcZkEY2WOzgJIWVqJBFIIPidlCjak0iTH2bt2u1fHQ4pvKvBYy6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.1/sweetalert2.min.js" integrity="sha512-vCI1Ba/Ob39YYPiWruLs4uHSA3QzxgHBcJNfFMRMJr832nT/2FBrwmMGQMwlD6Z/rAIIwZFX8vJJWDj7odXMaw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @await Component.InvokeAsync("NToastNotify")
+
+    <script>
+
+        $(document).ready(function () {
+            $('#index').DataTable();
+        });
+
+    </script>
+
+
+</body>
+
+</html>

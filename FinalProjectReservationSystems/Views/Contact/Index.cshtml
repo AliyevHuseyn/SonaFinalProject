@@ -1,0 +1,71 @@
+﻿@inject FinalProjectReservationSystems.Services.LayoutService service;
+@model ContactUsMessage
+@{
+    ViewData["Title"] = "Index";
+    List<Setting> settings = await service.GetSettingsAsync();
+}
+
+<!-- Contact Section Begin -->
+<section class="contact-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="contact-text">
+                    <h2>Contact Info</h2>
+                    <p>
+                        @settings.FirstOrDefault(x => x.Key == "ContactUsText")?.Value
+                    </p>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="c-o">Address:</td>
+                                <td>@settings.FirstOrDefault(x => x.Key == "Address")?.Value</td>
+                            </tr>
+                            <tr>
+                                <td class="c-o">Phone:</td>
+                                <td>@settings.FirstOrDefault(x => x.Key == "SupportPhone")?.Value</td>
+                            </tr>
+                            <tr>
+                                <td class="c-o">Email:</td>
+                                <td>@settings.FirstOrDefault(x => x.Key == "SupportEmail")?.Value</td>
+                            </tr>
+                            <tr>
+                                <td class="c-o">Fax:</td>
+                                <td>@settings.FirstOrDefault(x => x.Key == "FAX")?.Value</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-7 offset-lg-1">
+                <form asp-action="index" class="contact-form" method="post">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <span asp-validation-for="ClientFullName" class="text-danger"></span>
+                            <input asp-for="ClientFullName" placeholder="Your Full Name">
+                        </div>
+                        <div class="col-lg-6">
+                            <span asp-validation-for="ClientEmail" class="text-danger"></span>
+                            <input asp-for="ClientEmail" placeholder="Your Email Address">
+                        </div>
+                        <div class="text-center">
+                            <span asp-validation-for="ClientMessageSubject" class="text-danger"></span>
+                            <input asp-for="ClientMessageSubject" placeholder="Your Message Subject">
+                        </div>
+                        <div class="col-lg-12">
+                            <span asp-validation-for="ClientMessageText" class="text-danger"></span>                
+                            <textarea asp-for="ClientMessageText" placeholder="Your Message"></textarea>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit">Submit Now</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d365.5764177535249!2d49.853625617016405!3d40.37718368923682!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d079efb5163%3A0xc20aa51a5f0b5e01!2sCode%20Academy!5e0!3m2!1str!2saz!4v1677494798582!5m2!1str!2saz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</section>
+<!-- Contact Section End -->

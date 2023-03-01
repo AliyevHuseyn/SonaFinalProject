@@ -1,0 +1,37 @@
+﻿@model ContactUsMessage
+@{
+    ViewData["Title"] = "Details";
+}
+
+<form>
+    <div class="container">
+        <div class="row">
+            <div class="form-group col-lg-6">
+                <label asp-for="ClientFullName">Client Full Name</label>
+                <input class="form-control" type="text" placeholder="@Model.ClientFullName" readonly>
+            </div>
+            <div class="form-group col-lg-6">
+                <label asp-for="ClientEmail">Client Email Address</label>
+                <input class="form-control" type="text" placeholder="@Model.ClientEmail" readonly>
+            </div>
+            <div class="form-group col-lg-6">
+                <label asp-for="ClientMessageSubject">Client Email Subject</label>
+                <input class="form-control" type="text" placeholder="@Model.ClientMessageSubject" readonly>
+            </div>
+            <div class="form-group col-lg-6">
+                <label asp-for="ClientMessageText">Client Email Text</label>
+                <textarea readonly class="form-control" type="text">
+                    @Model.ClientMessageText
+                </textarea>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<form>
+    <div class="container-fluid d-flex justify-content-center mt-5">
+        <a asp-action="sendMessage" asp-route-id="@Model.Id" type="submit" class="btn btn-warning"><i class="fa-solid fa-paper-plane-top"></i>Answer!</a>
+    </div>
+</form>
+

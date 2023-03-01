@@ -1,0 +1,22 @@
+﻿@model BlogTag
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form method="post">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="form-group col-5">
+                <label asp-for="Name">Enter Tag Name</label>
+                <input asp-for="Name" class="form-control" placeholder="Enter Blog Tag Name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="container-fluid d-flex justify-content-center mt-5">
+        <button type="submit" class="btn btn-success"><i class="fa-solid fa-plus"></i>Submit!</button>
+    </div>
+</form>
+
